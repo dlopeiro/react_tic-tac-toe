@@ -5,10 +5,10 @@ function GameOption ({ status, onClick }) {
   return (
     <div className={styles.gameOption} onClick={onClick}>
       {
-        status === 1 && <Icon iconName="x" size="25px" />
+        status === -1 && <Icon iconName="x" size="25px" />
       }
       {
-        status === 0 && <Icon iconName="circle" size="25px" />
+        status === 1 && <Icon iconName="circle" size="25px" />
       }
     </div>
   )
