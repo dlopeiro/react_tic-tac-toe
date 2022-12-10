@@ -1,9 +1,11 @@
+import classNames from 'classnames'
+
 import styles from './GameOption.module.css'
 import Icon from '../icon/Icon'
 
-function GameOption ({ status, onClick }) {
+function GameOption ({ status, onClick, isWinner }) {
   return (
-    <div className={styles.gameOption} onClick={onClick}>
+    <div className={classNames(styles.gameOption, {[styles.winner]: isWinner})} onClick={onClick}>
       {
         status === -1 && <Icon iconName="x" size="25px" />
       }
