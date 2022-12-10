@@ -16,15 +16,16 @@ const winnerTable = [
 ]
 
 function Game () {
-  const [gameState, setGameState] = useState(Array(9).fill(0))
-  const [currentPlayer, setCurrentPlayer] = useState(-1)
-  const [winner, setWinner] = useState(0)
+  // below we have three useState functions: gameState, currentPlayer and winner
+  const [gameState, setGameState] = useState(Array(9).fill(0)) // updates the value in the game table
+  const [currentPlayer, setCurrentPlayer] = useState(-1) // updates who's the next player
+  const [winner, setWinner] = useState(0) // updates winner
 
-  const handleClick = (pos) => {
-    if (gameState[pos] === 0 && winner === 0) {
-      let newGameState = [...gameState]
-      newGameState[pos] = currentPlayer
-      setGameState(newGameState)
+  const handleClick = (pos) => { // when a space in the game table is clicked triggers changes
+    if (gameState[pos] === 0 && winner === 0) { // if space is empty and no one has won yet
+      let newGameState = [...gameState] 
+      newGameState[pos] = currentPlayer // updates the value of the space being clicked on with currentPlayer value
+      setGameState(newGameState) // updates gameState
     }
   }
 
