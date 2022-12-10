@@ -21,6 +21,7 @@ function Game () {
   const [currentPlayer, setCurrentPlayer] = useState(-1) // updates who's the next player
   const [winner, setWinner] = useState(0) // updates winner
   const [winnerLine, setWinnerLine] = useState([]) // updates winner line path
+  const [draw, setDraw] = useState(false)
 
   const handleClick = (pos) => { // when a space in the game table is clicked triggers changes
     if (gameState[pos] === 0 && winner === 0) { // if space is empty and no one has won yet
@@ -47,6 +48,14 @@ function Game () {
     setWinner(0)
     setCurrentPlayer(-1)
     setWinnerLine([])
+    setDraw(false)
+  }
+
+  const verifyDraw = () => {
+    if (gameState.filter((value) => value === 0).length === 0)
+    if (gameState.find((value) => value === 0) === undefined && winner === 0) {
+      setDraw(true)
+    }
   }
 
   const verifyWinnerLine = (position) => winnerLine.find((value) => value === position) !== undefined
@@ -54,7 +63,12 @@ function Game () {
   useEffect(() => { // this keeps watching the gameState parameter from the useState function
     setCurrentPlayer(currentPlayer * -1)
     verifyGame()
+    verifyDraw()
   }, [gameState])
+
+  useEffect(() => {
+    if (winner !== 0) setDraw(false)
+  }, [winner])
 
   return (
     <div className={styles.gameContent}>
@@ -66,11 +80,12 @@ function Game () {
               status={value}
               onClick={() => handleClick(position)}
               isWinner={verifyWinnerLine(position)}
+              isDraw={draw}
             />
           )
         }
       </div>
-      <GameInfo currentPlayer={currentPlayer} winner={winner} onReset={handleReset} />
+      <GameInfo currentPlayer={currentPlayer} winner={winner} onReset={handleReset} isDraw={draw} />
     </div>
   )
 }

@@ -2,15 +2,21 @@ import styles from "./GameInfo.module.css"
 import Icon from "../icon/Icon"
 import Button from "../button/Button"
 
-function GameInfo ({ currentPlayer, winner, onReset }) {
+function GameInfo ({ currentPlayer, winner, onReset, isDraw }) {
 
   const shouldEnableButton = () => {
     if (winner !== 0) return true
+    if (isDraw) return true
   }
+  
   return (
     <div className={styles.nextPlayerContent}>
       {
-        winner === 0 &&
+        isDraw && <h4>Equal forces are playing!</h4>
+      }
+      
+      {
+        !isDraw && winner === 0 &&
         <>
           <h4>Next player:</h4>
           {
@@ -21,6 +27,7 @@ function GameInfo ({ currentPlayer, winner, onReset }) {
           }
         </>
       }
+
       {
         winner !== 0 &&
         <>
@@ -33,6 +40,7 @@ function GameInfo ({ currentPlayer, winner, onReset }) {
           }
         </>
       }
+
       <Button onClick={onReset} disabled={!shouldEnableButton()}>
         Play again
       </Button>
