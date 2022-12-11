@@ -12,7 +12,7 @@ function GameInfo ({ currentPlayer, winner, onReset, isDraw }) {
   return (
     <div className={styles.nextPlayerContent}>
       {
-        isDraw && <h4>Equal forces are playing!</h4>
+        isDraw && <h4>Equal forces are at play!</h4>
       }
       
       {
