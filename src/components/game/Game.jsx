@@ -23,6 +23,8 @@ function Game () {
   const [winner, setWinner] = useState(0) // updates winner
   const [winnerLine, setWinnerLine] = useState([]) // updates winner line path
   const [draw, setDraw] = useState(false)
+  const [circleScore, setCircleScore] = useState(0)
+  const [xScore, setXScore] = useState(0)
 
   const handleClick = (pos) => { // when a space in the game table is clicked triggers changes
     if (gameState[pos] === 0 && winner === 0) { // if space is empty and no one has won yet
@@ -39,7 +41,11 @@ function Game () {
       if (sum === 3 || sum === -3) {
         setWinner(sum / 3);
         setWinnerLine(line)
-        console.log("winner: ", sum /3)
+        if (sum === 3) {
+          setCircleScore(circleScore + 1)
+        } else {
+          setXScore(xScore + 1)
+        }
       }
     })
   }
@@ -73,7 +79,7 @@ function Game () {
 
   return (
     <>
-      <Score />
+      <Score xScore={xScore} circleScore={circleScore} />
       <div className={styles.gameContent}>
         <div className={styles.game}>
           { // use curly brackets so the code know the following is javaScript lines

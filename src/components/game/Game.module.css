@@ -11,7 +11,7 @@
   margin-top: 20px;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 450px) {
   .gameContent {
     flex-direction: column;
   }
